@@ -47,4 +47,6 @@ def train():
 
 @app.local_entrypoint()
 def main():
-    train.remote()
+    call = train.spawn()
+    print(f"Training spawned. Function call ID: {call.object_id}")
+    print("Monitor: modal app logs nanochat-speedrun")
