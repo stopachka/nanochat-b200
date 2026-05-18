@@ -45,6 +45,26 @@ def train():
     volume.commit()
 
 
+@app.function(
+    image=image,
+    gpu="A10G",
+    volumes={CACHE_DIR: volume},
+    scaledown_window=300,
+    timeout=60 * 60,
+)
+@modal.concurrent(max_inputs=10)
+@modal.web_server(port=8000, startup_timeout=600)
+def serve():
+    import os
+    import subprocess
+
+    subprocess.Popen(
+        ["python", "-m", "scripts.chat_web", "--host", "0.0.0.0", "--port", "8000"],
+        cwd=WORKDIR,
+        env={**os.environ, "NANOCHAT_BASE_DIR": CACHE_DIR},
+    )
+
+
 @app.local_entrypoint()
 def main():
     call = train.spawn()
