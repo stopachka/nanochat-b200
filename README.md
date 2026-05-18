@@ -1,5 +1,7 @@
 # nanochat
 
+> _Note: I am playing with nanochat in Modal. I made a quick script to run the training loop in Modal, and tweaked `speedrun.sh` to support B200s._
+
 ![nanochat logo](dev/nanochat.png)
 ![scaling laws](dev/scaling_laws_jan26.png)
 
