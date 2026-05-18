@@ -24,7 +24,7 @@ volume = modal.Volume.from_name("nanochat-cache", create_if_missing=True)
 
 @app.function(
     image=image,
-    gpu="B200!:8",
+    gpu="B200:8",
     volumes={CACHE_DIR: volume},
     secrets=[modal.Secret.from_name("wandb")],
     timeout=8 * 60 * 60,
